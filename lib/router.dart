@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:km_limit/ui/permission/permission.dart';
 
 import 'main/home.dart';
+import 'permission/permission.dart';
+import 'rules/rules.dart';
 
 class Router {
   static Route<dynamic> generateRoute(RouteSettings routeSettings) {
-    final dynamicArguments = routeSettings.arguments;
 
     Widget Function(BuildContext context) routeBuilder = (context) => Scaffold(
       body: Center(
@@ -20,12 +20,9 @@ class Router {
       case Home.routeName:
         routeBuilder = (_) => Home();
         break;
-
-      //case FlappyWebView.routeName:
-      //  if (dynamicArguments is FlappyWebViewArguments) {
-      //    routeBuilder = (_) => FlappyWebView(url: dynamicArguments.url, title: dynamicArguments.title);
-      //  }
-      //  break;
+      case Rules.routeName:
+        routeBuilder = (_) => Rules();
+        break;
     }
     return MaterialPageRoute(builder: routeBuilder);
   }

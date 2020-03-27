@@ -1,8 +1,9 @@
+import 'package:CoroFooting/themes.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'ui/router.dart';
-import 'ui/service/service.dart';
-import 'ui/themes.dart';
+import 'router.dart';
+import 'service/service.dart';
 
 class SimpleBlocDelegate extends BlocDelegate {
   @override
@@ -26,6 +27,7 @@ class SimpleBlocDelegate extends BlocDelegate {
 
 void main() {
   BlocSupervisor.delegate = SimpleBlocDelegate();
+  FlutterError.onError = Crashlytics.instance.recordFlutterError;
   runApp(MyApp());
 }
 

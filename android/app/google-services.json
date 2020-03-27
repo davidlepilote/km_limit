@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "870914314915",
+    "firebase_url": "https://corofooting.firebaseio.com",
+    "project_id": "corofooting",
+    "storage_bucket": "corofooting.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:870914314915:android:323d282f26763e04a8e516",
+        "android_client_info": {
+          "package_name": "com.monirapps.corofooting"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "870914314915-m1bi0pf6812kscs1t4m249rcecoedgid.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCm2owUcj9dyr4tYgpdXh8JP7IRCJnLQNY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "870914314915-m1bi0pf6812kscs1t4m249rcecoedgid.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

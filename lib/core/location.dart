@@ -35,6 +35,11 @@ class LocationProvider {
     return true;
   }
 
+  Future<bool> hasPermission() async {
+    _permissionGranted = await location.hasPermission();
+    return _permissionGranted == PermissionStatus.GRANTED;
+  }
+
   Future<LocationData> locationData() async {
     if(_permissionGranted == PermissionStatus.GRANTED && _serviceEnabled) {
       return location.getLocation();
