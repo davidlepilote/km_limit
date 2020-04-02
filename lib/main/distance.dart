@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:CoroFooting/themes.dart';
+import 'package:CoroJogging/explain/explain.dart';
+import 'package:CoroJogging/themes.dart';
 import 'package:flutter/material.dart';
-import 'package:CoroFooting/core/location.dart';
+import 'package:CoroJogging/core/location.dart';
 import 'package:location/location.dart';
+import 'package:vibration/vibration.dart';
 
 class DistanceObject {
   final int distance;
@@ -36,41 +38,62 @@ class _DistanceState extends State<Distance> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 180,
-      decoration: BoxDecoration(
-        color: _distance.isTooFar() ? AppTheme.of(context).colors.red : AppTheme.of(context).colors.green,
-        borderRadius: BorderRadius.all(
-          Radius.circular(17.0),
-        ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 18.0),
-        child: Column(
-          children: <Widget>[
-            Text(
-              "Distance",
-              style: AppTheme.of(context).textStyles.text,
+    return FlatButton(
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      onPressed: () => Navigator.of(context).pushNamed(Explain.routeName),
+      child: Stack(
+        alignment: Alignment.center,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 40.0),
+            child: Container(
+              width: 180,
+              decoration: BoxDecoration(
+                color: _distance.isTooFar() ? AppTheme.of(context).colors.red : AppTheme.of(context).colors.green,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(17.0),
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 18.0),
+                child: Column(
+                  children: <Widget>[
+                    Text(
+                      "Distance",
+                      style: AppTheme.of(context).textStyles.text,
+                    ),
+                    widget._origin != null
+                        ? Text(_distance.description(), style: AppTheme.of(context).textStyles.text4)
+                        : StreamBuilder<LocationData>(
+                            stream: LocationProvider().locationDataStream(),
+                            builder: (context, AsyncSnapshot<LocationData> snapshot) {
+                              var text;
+                              if (snapshot.hasData) {
+                                text = "0 m";
+                              } else {
+                                text = "...";
+                              }
+                              return Text(
+                                text,
+                                style: AppTheme.of(context).textStyles.text4,
+                              );
+                            },
+                          ),
+                  ],
+                ),
+              ),
             ),
-            widget._origin != null
-                ? Text(_distance.description(), style: AppTheme.of(context).textStyles.text4)
-                : StreamBuilder<LocationData>(
-                    stream: LocationProvider().locationDataStream(),
-                    builder: (context, AsyncSnapshot<LocationData> snapshot) {
-                      var text;
-                      if (snapshot.hasData) {
-                        text = "0 m";
-                      } else {
-                        text = "...";
-                      }
-                      return Text(
-                        text,
-                        style: AppTheme.of(context).textStyles.text4,
-                      );
-                    },
-                  ),
-          ],
-        ),
+          ),
+          Positioned(
+            right: 0,
+            child: Icon(
+              Icons.help,
+              size: 30,
+              color: AppTheme.of(context).colors.primaryColor,
+            ),
+          )
+        ],
       ),
     );
   }
@@ -82,6 +105,15 @@ class _DistanceState extends State<Distance> {
     _subscription = LocationProvider().locationDataStream().listen((LocationData currentLocation) {
       setState(() {
         _distance = _calculateDistance(widget._origin, currentLocation);
+        if (_distance.isTooFar()) {
+          Vibration.hasVibrator().then((hasVibrator) {
+            if (hasVibrator) {
+              Vibration.vibrate();
+            }
+          });
+        } else {
+          Vibration.cancel();
+        }
       });
     });
   }

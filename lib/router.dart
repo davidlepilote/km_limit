@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'explain/explain.dart';
 import 'main/home.dart';
 import 'permission/permission.dart';
 import 'rules/rules.dart';
@@ -22,6 +23,9 @@ class Router {
         break;
       case Rules.routeName:
         routeBuilder = (_) => Rules();
+        break;
+      case Explain.routeName:
+        routeBuilder = (_) => Explain();
         break;
     }
     return MaterialPageRoute(builder: routeBuilder);

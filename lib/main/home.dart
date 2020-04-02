@@ -10,18 +10,14 @@ class Home extends StatelessWidget {
 
   Home() {
     myBanner = BannerAd(
-      // Replace the testAdUnitId with an ad unit id from the AdMob dash.
-      // https://developers.google.com/admob/android/test-ads
-      // https://developers.google.com/admob/ios/test-ads
         adUnitId: 'ca-app-pub-9237574227734784/6706072361',
-        size: AdSize.smartBanner,
+        size: AdSize.largeBanner,
         listener: (MobileAdEvent event) {
           print("BannerAd event is $event");
         });
     myBanner
       ..load()
       ..show(
-        // Banner Position
         anchorType: AnchorType.bottom,
       );
   }

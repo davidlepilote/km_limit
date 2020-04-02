@@ -11,17 +11,23 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>km_limit</string>
+	<string>Jogging confiné</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>$(FLUTTER_BUILD_NAME)</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-9237574227734784~6099567707</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Afin de vous permettre de courir à moins d&apos;un kilomètre de chez vous, nous avons besoin que vous nous donniez la permission d&apos;utiliser votre géolocalisation. Celle-ci n&apos;est enregistrée nulle part et ne sert qu&apos;à faire fonctionner l&apos;application. Sans cela, l&apos;application ne pourra pas fonctionner.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Afin de vous permettre de courir à moins d&apos;un kilomètre de chez vous, nous avons besoin que vous nous donniez la permission d&apos;utiliser votre géolocalisation. Celle-ci n&apos;est enregistrée nulle part et ne sert qu&apos;à faire fonctionner l&apos;application. Sans cela, l&apos;application ne pourra pas fonctionner.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -29,8 +35,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>

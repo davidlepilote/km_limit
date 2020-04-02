@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:CoroFooting/rules/rules.dart';
-import 'package:CoroFooting/themes.dart';
+import 'package:CoroJogging/rules/rules.dart';
+import 'package:CoroJogging/themes.dart';
 import 'package:flutter/material.dart';
-import 'package:CoroFooting/core/location.dart';
+import 'package:CoroJogging/core/location.dart';
 import 'package:location/location.dart';
 
 import 'distance.dart';
@@ -12,6 +12,7 @@ import 'distance.dart';
 class Countdown extends StatefulWidget {
   @override
   _CountdownState createState() => _CountdownState();
+
 }
 
 class _CountdownState extends State<Countdown> {
@@ -25,10 +26,13 @@ class _CountdownState extends State<Countdown> {
 
   @override
   Widget build(BuildContext context) {
+    double maxSize = min(300, max(215, MediaQuery.of(context).size.height - 500));
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        SizedBox(height: 16,),
+        SizedBox(
+          height: 16,
+        ),
         Image.asset(
           "assets/ic_launcher.png",
           width: 50,
@@ -61,27 +65,27 @@ class _CountdownState extends State<Countdown> {
           elevation: 10,
         ),
         SizedBox(
-          height: 40,
+          height: 25,
         ),
         Stack(
           alignment: Alignment.center,
           children: <Widget>[
             Container(
-              width: 280,
-              height: 280,
+              width: maxSize,
+              height: maxSize,
             ),
-            _points(),
+            _points(maxSize),
             Container(
-              width: 250,
-              height: 250,
+              width: maxSize - 30,
+              height: maxSize - 30,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(color: AppTheme.of(context).colors.grey2, width: 2),
               ),
             ),
             Container(
-                width: 200,
-                height: 200,
+                width: maxSize - 80,
+                height: maxSize - 80,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   shape: BoxShape.circle,
@@ -98,15 +102,15 @@ class _CountdownState extends State<Countdown> {
                   ],
                 )),
             Container(
-              width: 190,
-              height: 190,
+              width: maxSize - 90,
+              height: maxSize - 90,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(color: AppTheme.of(context).colors.grey2.withAlpha(110), width: 6),
               ),
             ),
             CustomPaint(
-              size: Size(184, 184),
+              size: Size(maxSize - 96, maxSize - 96),
               painter: ArcPainter(context, _progress()),
             ),
             FlatButton(
@@ -114,18 +118,20 @@ class _CountdownState extends State<Countdown> {
               highlightColor: Colors.transparent,
               onPressed: () => _countDown.inMilliseconds > 0 ? _stopTimer() : _startTimer(),
               child: Text(
-                _originLocation != null ? "Stop" : "Go",
+                _originLocation != null || _countDown.inMilliseconds > 0 ? "Stop" : "Go",
                 style: AppTheme.of(context).textStyles.headline,
               ),
             ),
           ],
         ),
         SizedBox(
-          height: 30,
+          height: 25,
         ),
         Distance(_originLocation),
         _time(),
-        SizedBox(height: 16,)
+        SizedBox(
+          height: 16,
+        )
       ],
     );
   }
@@ -146,13 +152,13 @@ class _CountdownState extends State<Countdown> {
         Duration(hours: 1).inSeconds;
   }
 
-  Widget _points() {
+  Widget _points(double maxSize) {
     var children = <Widget>[];
     for (int i = 0; i < 24; i++) {
       children.add(Transform.rotate(
         angle: pi * 2 / 24 * i,
         child: Transform.translate(
-          offset: Offset(0, 140),
+          offset: Offset(0, maxSize / 2),
           child: Container(
             width: 5,
             height: 5,
@@ -173,7 +179,7 @@ class _CountdownState extends State<Countdown> {
     return Column(
       children: <Widget>[
         SizedBox(
-          height: 28,
+          height: 20,
         ),
         Text(
           "Temps restant",

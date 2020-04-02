@@ -1,8 +1,8 @@
-import 'package:CoroFooting/permission/permission.dart';
-import 'package:CoroFooting/themes.dart';
+import 'package:CoroJogging/permission/permission.dart';
+import 'package:CoroJogging/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:CoroFooting/core/location.dart';
+import 'package:CoroJogging/core/location.dart';
 
 class Service extends StatelessWidget {
   static const String routeName = "/Service";

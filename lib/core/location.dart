@@ -3,7 +3,7 @@ import 'package:location/location.dart';
 class LocationProvider {
   static final LocationProvider _singleton = LocationProvider._internal();
 
-  Location location = new Location();
+  Location location = Location();
   bool _serviceEnabled;
   PermissionStatus _permissionGranted;
 
